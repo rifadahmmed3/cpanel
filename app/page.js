@@ -33,7 +33,7 @@ export default async function Home() {
   return (
     <div className="p-10 px-5 md:px-16">
       {/* Slider */}
-      <Slider sliderList={sliderList} />
+      {/* <Slider sliderList={sliderList} /> */}
       {/* Category List */}
       <CategoryList categoryList={categoryList}/>
       {/* Products List */}
