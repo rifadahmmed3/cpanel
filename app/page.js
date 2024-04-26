@@ -5,6 +5,7 @@ import GlobalApi from './_utils/GlobalApi';
 import CategoryList from "./_components/CategoryList";
 import ProductsList from "./_components/ProductsList";
 import Footer from "./_components/Footer";
+import SlidersOne from "./_components/SlidersOne";
 
 
 // export async function getServerSideProps(context){
@@ -38,6 +39,8 @@ export default async function Home() {
       {/* Products List */}
       <ProductsList allProductList={allProductList}/>
       {/* Banner */}
+
+      <SlidersOne/>
 
       <Image src='/banner.png' 
 
