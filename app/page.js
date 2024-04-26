@@ -1,4 +1,4 @@
-'use server'
+
 import Image from "next/image";
 import Slider from "./_components/Slider";
 import GlobalApi from './_utils/GlobalApi';
@@ -32,6 +32,9 @@ export default async function Home() {
   
   return (
     <div className="p-10 px-5 md:px-16">
+
+      <SlidersOne sliderList={sliderList}/>
+
       {/* Slider */}
       {/* <Slider sliderList={sliderList} /> */}
       {/* Category List */}
@@ -40,7 +43,7 @@ export default async function Home() {
       <ProductsList allProductList={allProductList}/>
       {/* Banner */}
 
-      <SlidersOne/>
+      
 
       <Image src='/banner.png' 
 

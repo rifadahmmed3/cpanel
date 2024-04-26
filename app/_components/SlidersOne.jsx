@@ -1,5 +1,5 @@
 "use client"
-import React from 'react'
+import React, { useState } from 'react'
 import GlobalApi from '../_utils/GlobalApi';
 import Image from 'next/image'
 import {
@@ -11,29 +11,55 @@ import {
   } from "@/components/ui/carousel"
   
 
-  export async function getServerSideProps(context){
-  const sliderList= await GlobalApi.getSliders();
-  return {
-    props: {
-      slider:sliderList,
+//   export async function getServerSideProps(context){
+//   const sliderList= await GlobalApi.getSliders();
+//   return {
+//     props: {
+//       sliders:sliderList,
+//     }
+//   }
+// }
+
+
+
+function SlidersOne({sliderList_}) {
+
+    const [sliderLists,getSliderList]= useState([])
+
+    const getSliders= async() =>{
+        const sliderList= await GlobalApi.getSliders();
+        getSliderList(sliderList);
     }
-  }
-}
-
-
-
-async function SlidersOne({sliderList}) {
-
-
-    // const sliderList= await GlobalApi.getSliders();
+    
+    getSliders()
 
 
   return (
     <div>
+        {sliderLists? 
         <Carousel>
+        <CarouselContent>
+            {sliderLists.map((slider,index)=>(
+                <CarouselItem key={index}>
+                    <Image src={slider.attributes?.icon?.data[0]?.attributes?.url}
+                    unoptimized={true}
+                    width={120}
+                    height={100}
+                    alt='sld'
+                    className='w-full h-[200px] md:h-[400px] object-cover rounded-2xl'
+                    />
+                    {/* <h2>{"sample is "+slider?.attributes?.icon?.data?.attributes?.name}</h2> */}
+                </CarouselItem>
+                
+            ))}
+            
+        </CarouselContent>
+        <CarouselPrevious />
+        <CarouselNext />
+    </Carousel>:<Carousel>
                 <CarouselContent>
-                    {sliderList.map((slider,index)=>(
-                        <CarouselItem >
+                    {sliderList_.map((slider,index)=>(
+                        <CarouselItem key={index}>
                             <Image src={slider.attributes?.icon?.data[0]?.attributes?.url}
                             unoptimized={true}
                             width={120}
@@ -50,6 +76,9 @@ async function SlidersOne({sliderList}) {
                 <CarouselPrevious />
                 <CarouselNext />
             </Carousel>
+    
+    }
+        
 
     </div>
   )
