@@ -1,5 +1,15 @@
 "use client"
 import React from 'react'
+import GlobalApi from '../_utils/GlobalApi';
+import Image from 'next/image'
+import {
+    Carousel,
+    CarouselContent,
+    CarouselItem,
+    CarouselNext,
+    CarouselPrevious,
+  } from "@/components/ui/carousel"
+  
 
 async function SlidersOne() {
 
