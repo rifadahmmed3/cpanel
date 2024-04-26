@@ -11,10 +11,21 @@ import {
   } from "@/components/ui/carousel"
   
 
-async function SlidersOne() {
+  export async function getServerSideProps(context){
+  const sliderList= await GlobalApi.getSliders();
+  return {
+    props: {
+      slider:sliderList,
+    }
+  }
+}
 
 
-    const sliderList= await GlobalApi.getSliders();
+
+async function SlidersOne({sliderList}) {
+
+
+    // const sliderList= await GlobalApi.getSliders();
 
 
   return (
@@ -22,7 +33,7 @@ async function SlidersOne() {
         <Carousel>
                 <CarouselContent>
                     {sliderList.map((slider,index)=>(
-                        <CarouselItem key={index}>
+                        <CarouselItem >
                             <Image src={slider.attributes?.icon?.data[0]?.attributes?.url}
                             unoptimized={true}
                             width={120}
