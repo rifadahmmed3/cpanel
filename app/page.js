@@ -26,14 +26,14 @@ import SlidersOne from "./_components/SlidersOne";
 
 export default async function Home() {
 
-  const sliderList= await GlobalApi.getSliders();
+
   const categoryList= await GlobalApi.getCategoryList();
   const allProductList= await GlobalApi.getAllProductList();
   
   return (
     <div className="p-10 px-5 md:px-16">
 
-      <SlidersOne sliderList={sliderList}/>
+      <SlidersOne />
 
       {/* Slider */}
       {/* <Slider sliderList={sliderList} /> */}

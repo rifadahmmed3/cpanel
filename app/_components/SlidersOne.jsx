@@ -9,7 +9,9 @@ import {
     CarouselNext,
     CarouselPrevious,
   } from "@/components/ui/carousel"
-  
+
+import { Skeleton } from "@/components/ui/skeleton"
+
 
 //   export async function getServerSideProps(context){
 //   const sliderList= await GlobalApi.getSliders();
@@ -22,13 +24,15 @@ import {
 
 
 
-function SlidersOne({sliderList_}) {
+function SlidersOne() {
 
     const [sliderLists,getSliderList]= useState([])
+    const [cheack,setCheak] = useState(true)
 
     const getSliders= async() =>{
         const sliderList= await GlobalApi.getSliders();
         getSliderList(sliderList);
+        setCheak(false);
     }
     
     getSliders()
@@ -36,8 +40,35 @@ function SlidersOne({sliderList_}) {
 
   return (
     <div>
-        {sliderLists? 
-        <Carousel>
+        {cheack? <Carousel>
+        <CarouselContent>
+        
+                <CarouselItem >
+                    {/* <Card className="p-4" radius="lg">
+                        <Skeleton className="rounded-lg">
+                            <div className="w-full h-[200px] md:h-[400px] object-cover rounded-2xl"></div>
+                        </Skeleton>
+                    </Card> */}
+
+                    <Skeleton className="w-full h-[200px] md:h-[400px] object-cover rounded-2xl" />
+
+
+                    {/* <Image src='/slider.jpg'
+                    unoptimized={true}
+                    width={120}
+                    height={100}
+                    alt='sld'
+                    className='w-full h-[200px] md:h-[400px] object-cover rounded-2xl'
+                    /> */}
+                    {/* <h2>{"sample is "+slider?.attributes?.icon?.data?.attributes?.name}</h2> */}
+                </CarouselItem>
+
+        </CarouselContent>
+        <CarouselPrevious />
+        <CarouselNext />
+    </Carousel>
+
+        :<Carousel>
         <CarouselContent>
             {sliderLists.map((slider,index)=>(
                 <CarouselItem key={index}>
@@ -56,26 +87,7 @@ function SlidersOne({sliderList_}) {
         </CarouselContent>
         <CarouselPrevious />
         <CarouselNext />
-    </Carousel>:<Carousel>
-                <CarouselContent>
-                    {sliderList_.map((slider,index)=>(
-                        <CarouselItem key={index}>
-                            <Image src={slider.attributes?.icon?.data[0]?.attributes?.url}
-                            unoptimized={true}
-                            width={120}
-                            height={100}
-                            alt='sld'
-                            className='w-full h-[200px] md:h-[400px] object-cover rounded-2xl'
-                            />
-                            {/* <h2>{"sample is "+slider?.attributes?.icon?.data?.attributes?.name}</h2> */}
-                        </CarouselItem>
-                        
-                    ))}
-                    
-                </CarouselContent>
-                <CarouselPrevious />
-                <CarouselNext />
-            </Carousel>
+    </Carousel>
     
     }
         
